@@ -1,0 +1,655 @@
+//Общие стили + верхняя полоса ================================================================================================================================================================================================================================================
+.header {
+
+   &__top {
+   }
+
+   &__body {
+   }
+
+   &__catalog {
+   }
+}
+.top-header {
+   background-color: $mainDarkColor;
+   color: #fff;
+   padding: rem(10) 0;
+   &__container {
+      display: flex;
+      align-items: center;
+      gap: rem(20);
+      min-height: rem(50);
+      @media(max-width: $tablet) {
+         gap: rem(35);
+      }
+   }
+
+   &__menu {
+      flex: 1 1 auto;
+   }
+
+   &__user {
+      position: relative;
+      z-index: 5;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      font-weight: 600;
+      line-height: math.div(22, 18);
+      gap: em(15, 18);
+      &:before {
+         font-size: rem(28);
+      }
+      @media(any-hover: hover) {
+         &:hover {
+            span {text-decoration: underline;}
+         }
+      }
+      @media(max-width: $tablet) {
+         font-size: rem(35);
+         span {
+            display: none;
+         }
+      }
+   }
+}
+.menu-top-header {
+
+   &__list {
+      font-size: rem(16);
+      display: flex;
+      row-gap: rem(5);
+      flex-wrap: wrap;
+      @include adaptiveValue("column-gap", 60, 20);
+      @media(max-width: $tablet) {
+         flex-direction: column;
+         row-gap: rem(10);
+      }
+   }
+
+   &__item {
+      &_catalog {
+         @media(min-width: $tablet) {
+            display: none;
+         }
+      }
+   }
+
+   &__link {
+      line-height: math.div(20, 16);
+      position: relative;
+      @media(min-width: $tablet) {
+         &:after {
+            content: "";
+            position: absolute;
+            bottom: rem(-5);
+            left: 50%;
+            transform: translate(-50%, 0);
+            height: 2px;
+            background-color: #fff;
+            width: 0;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s ease;
+         }
+         &:hover:after {
+            visibility: visible;
+            opacity: 1;      
+            width: 100%;
+         }
+      }
+      &_catalog {
+         display: flex;
+         align-items: center;
+         flex-direction: row-reverse;
+         justify-content: space-between;
+         &::before {
+            flex: 0 0 rem(14);
+            height: rem(14);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: rem(8);
+				transform: translateY(rem(-2)) rotate(-90deg);
+         }
+      }
+      @media(max-width: $tablet) {
+         @include adaptiveValue("font-size", 24, 18, 992, 320, 1);
+      }
+   }
+   @media(max-width: $tablet) {
+      display: none;
+   }
+}
+
+//================================================================================================================================================================================================================================================
+.menu {
+   &__body {
+      right: -100%;
+      @media(max-width: $tablet) {
+         position: fixed;
+         width: 100%;
+         height: 100%;
+         top: 0;
+         overflow: auto;
+         background-color: $mainDarkColor;
+         padding: rem(80) rem(15) rem(50) rem(20);
+         transition: all 0.3s ease;
+         z-index: 4;
+         &::before {
+            content: '';
+            position: fixed;
+            width: 100%;
+            height: rem(70);
+            right: -100%;
+            top: 0;
+            background-color: $mainDarkColor;
+         }
+         .menu-open & {
+            right: 0;
+            &::before {
+               right: 0;
+            }
+         }
+      }
+   }   
+	@media (max-width: $tablet) {
+      flex: 1 1 auto;
+      display: flex;
+      justify-content: flex-end;
+   }
+}
+
+//Средняя полоса ================================================================================================================================================================================================================================================
+.body-header {
+   padding: rem(10) 0;
+   background-color: #ecF1f2;
+
+   &__container {
+      display: flex;
+      min-height: rem(70);
+      align-items: center;
+      @media(max-width: $tablet) {
+         justify-content: space-between;
+      }
+   }
+
+   &__logo {
+      @extend %ic;
+      @extend ._icon-logo;
+      font-size: rem(42);
+      color: $mainDarkColor;
+   }
+
+   &__search {
+      flex: 1 1 auto;
+      @media(min-width: $tablet) {
+         padding-right: rem(20);
+      }
+      @media(min-width: $mobileSmall) {
+         @include adaptiveValue("padding-left", 158, 20, 1620, 1400, 1);
+      }
+   }
+
+   &__actions {
+   }
+}
+.search-header {
+   background-color: rgba(7, 7, 7, 0.03);
+   position: relative;
+   border-radius: rem(3);
+	border: 1px solid rgba(4, 4, 4, 0.5);
+   @media(min-width: $tablet) {
+      max-width: rem(377);
+   }
+
+   &__button {
+      position: absolute;
+      background-color: transparent;
+      height: rem(41);
+      width: rem(41);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      top: 0;
+      left: rem(8);
+      font-size: rem(14);
+		color: rgba(0, 0, 0, 0.5);
+   }
+
+   &__input {
+      width: 100%;
+      background-color: transparent;
+      border-radius: rem(3);
+      padding: 0 rem(20) 0 rem(50);
+      height: rem(41);
+      color: $mainColor;
+      transition: all 0.3s ease;
+      &::placeholder {
+         color: rgba(0, 0, 0, 0.5);
+      }
+   }
+   @media(max-width: $mobileSmall) {
+      background-color: white;
+   }
+}
+
+//Избранное, корзина, локация, номер в средней полосе ================================================================================================================================================================================================================================================
+.actions-header {
+   display: flex;
+   align-items: center;
+   @include adaptiveValue("column-gap", 30, 20, 1620, 1000, 1);
+   @media(max-width: $tablet) {
+      display: none;
+   }
+   &__location {
+      display: inline-flex;
+      align-items: center;
+      font-weight: 600;
+      @include adaptiveValue("margin-right", 25, 0, 1620, 1240, 1);
+      &::before {
+         font-size: rem(24);
+         margin: 0px em(10, 24) 0px 0px;
+      }
+   }
+
+   &__phones {
+   }
+
+   &__favourite {
+      font-size: rem(27);
+      position: relative;
+      z-index: 5;
+   }
+
+   &__cart {
+      position: relative;
+      z-index: 5;
+
+   }
+}
+.phones-header {
+
+   &__items {
+   }
+
+   &__item {
+      position: relative;
+      display: flex;
+   }
+
+   &__phone {
+      font-weight: 600;
+      line-height: math.div(22, 18);
+      white-space: nowrap;
+      position: relative;
+      z-index: 5;
+      @media(max-width: $tablet) {
+         font-size: rem(27);
+      }
+      &:before {
+         @extend %ic;
+         @extend ._icon-footer-phone;
+         display: none;
+      }
+      @media(max-width: $mobileSmall) {
+         span {
+            display: none;
+         }
+         &::before {
+            display: inline-flex;
+         }
+      }
+   }
+
+   &__arrow {
+      color: $orangeColor;
+      font-size: rem(10);
+      margin: 0px 0px 0px em(17, 16);
+      transition: all 0.3s ease;
+      &._spoller-active {
+         transform: rotate(-180deg);
+      }
+      @media(max-width: $tablet) {
+         display: none;
+      }
+   }
+
+   &__list {
+      color: $mainColor;
+      position: absolute;
+      top: 100%;
+      width: 100%;
+      left: 0;
+      background-color: #fff;
+      padding: rem(10) rem(15);
+      border-radius: rem(10);
+      margin: rem(5) 0px 0px 0px;
+      box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+      z-index: 3;
+      li {
+         &:not(:last-child) {margin-bottom: em(8, 18);}
+      }
+      @media(max-width: $tablet) {
+         display: none;
+      }
+   }
+
+   &__callback {
+      margin: rem(3) 0px 0px 0px;
+      color: $orangeColor;
+      font-weight: 700;
+      line-height: math.div(22, 18);
+      &:hover {text-decoration: underline;}
+      @media(max-width: $tablet) {
+         display: none;
+      }
+   }
+}
+.cart-header {
+   display: flex;
+   align-items: center;
+   column-gap: rem(15);
+
+   &__icon {
+      flex: 0 0 37px;
+      font-size: rem(32);
+      position: relative;
+      span {
+         position: absolute;
+         top: 0;
+         right: 0;
+         width: rem(14);
+         height: rem(14);
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         background-color: $orangeColor;
+         font-size: rem(8);
+         color: #fff;
+         border-radius: 50%;
+      }
+   }
+
+   &__body {
+      flex: 0 0 auto;
+      font-size: rem(16);
+      line-height: math.div(20, 16);
+      font-weight: 500;
+      @media(max-width: em(1250)) {
+         display: none;
+      }
+   }
+
+   &__summ {
+      &:not(:last-child) {margin-bottom: em(5, 16);}
+   }
+
+   &__link {
+      color: $orangeColor;
+      &:hover {text-decoration: underline;}
+   }
+}
+
+//Нижняя полоса, основное меню ================================================================================================================================================================================================================================================
+.catalog-header {
+   background-color: $mainDarkColor;
+   box-shadow: 0px 4px 20px rgba(53, 53, 53, 0.18);
+   position: relative;
+   color: #fff;
+
+   &__container {
+   }
+
+   &__menu {
+   }
+   
+   @media(max-width: $mobileSmall) {
+      padding: rem(20) 0;
+   }
+}
+.menu-catalog {
+
+   &__list {
+      display: flex;
+      column-gap: rem(10);
+      justify-content: space-between;
+      @media(max-width: $tablet) {
+         flex-direction: column;
+         row-gap: rem(25);
+      }
+   }
+
+   &__item {
+   }
+
+   &__link {
+      display: flex;
+      position: relative;
+      transition: all 0.3s ease;
+      @media(min-width: $tablet) {
+         justify-content: center;
+         align-items: center;
+         text-align: center;
+         padding: 0 rem(10);
+         min-height: rem(70);
+         &:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, 0);
+            height: 2px;
+            background-color: $orangeColor;
+            width: 0;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s ease;
+         }
+         &:hover{ 
+            &:after {
+               visibility: visible;
+               opacity: 1;      
+               width: calc(100% - 1.25rem);
+            }
+         }
+         &._sub-menu-active {
+            color: $orangeColor;
+            &:after {
+               visibility: visible;
+               opacity: 1;      
+               width: calc(100% - 1.25rem);
+            }
+         }
+      }
+      @media(max-width: $tablet) {
+         @include adaptiveValue("font-size", 24, 18, 992, 320, 1);
+      }
+   }
+
+   &__sub-menu {
+      width: 100%;
+      top: 100%;
+      right: 0;
+      background-color: $mainDarkColor;
+      transition: all 0.5s ease;
+   }
+
+   &__back {
+      display: none;
+      @media(max-width: $tablet) {
+         display: inline-flex;
+         align-items: center;
+         @include adaptiveValue("font-size", 24, 18, 992, 320, 1);
+         &:not(:last-child) {
+            margin-bottom: em(58, 24);
+         }
+         &::before {
+            margin-right: em(18, 24);
+         }
+      }
+   }
+
+   @media(max-width: $tablet) {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: $mainDarkColor;
+      padding: rem(25) rem(15) rem(50) rem(20);
+      transition: all 0.3s ease;
+      
+      .catalog-open & {
+         right: 0;
+         z-index: 6;
+      }
+   }
+}
+.sub-menu-catalog {
+   font-size: rem(16);
+   @media(max-width: $tablet) {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: $mainDarkColor;
+      padding: rem(25) rem(15) rem(50) rem(20);
+      transition: all 0.3s ease;
+      .sub-menu-open & {
+         display: block;
+         right: 0;
+			z-index: 6;
+      }
+   }
+   &__back {
+      display: none;
+      @media(max-width: $tablet) {
+         display: inline-flex;
+         align-items: center;
+         @include adaptiveValue("font-size", 24, 18, 992, 320, 1);
+         &:not(:last-child) {
+            margin-bottom: em(58, 24);
+         }
+         &::before {
+            margin-right: em(10, 24);
+         }
+      }
+   }
+
+   &__container {
+      padding: 0 rem(10);
+   }
+   
+   &__block { 
+      display: none;
+      @for $var from 1 to 6 {
+         &_#{$var} {
+            grid-template-columns: repeat($var, minmax(auto, rem(312)));
+         }
+      }
+      &._sub-menu-open {
+         display: grid;
+         @media(max-width: $tablet) {
+            display: block;
+         }
+      }
+
+   } 
+
+   &__category {
+      line-height: math.div(20, 16);
+      @media(min-width: $tablet) {
+         font-weight: 700;
+         padding: rem(30) rem(15) rem(30) 0;
+      }
+      @media(max-width: $tablet) {
+         &:not(:last-child) {
+            margin-bottom: em(24, 15)
+         }
+      }
+   }
+
+   &__list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: rem(30) rem(15) rem(30) 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+		@media (max-width: $tablet) {
+			display: none;
+		}
+   }
+
+   &__item {
+   }
+
+   &__link {
+		line-height: math.div(20, 16);
+      &:hover {text-decoration: underline;}
+   }
+
+   &__link-category {
+      @include adaptiveValue("font-size", 24, 18, 992, 320);
+   }
+
+   &__all {
+      padding: rem(30) rem(15) rem(30) 0;
+      @media(max-width: $tablet) {
+         display: none;
+      }
+   }
+   &__link-all {
+      color: $orangeColor;
+      &:hover {text-decoration: underline;}
+   }
+}
+
+//Иконка для меню-бургер ================================================================================================================================================================================================================================================
+.icon-menu {
+	@media (max-width: $tablet) {
+		display: block;
+		position: relative;
+		width: rem(34);
+		height: rem(18);
+		cursor: pointer;
+		z-index: 10;
+		span,
+		&::before,
+		&::after {
+			content: "";
+			transition: all 0.3s ease 0s;
+			right: 0;
+			position: absolute;
+			width: 100%;
+			height: rem(2);
+			background-color: #fff;
+		}
+		&::before {
+			top: 0;
+		}
+		&::after {
+			bottom: 0;
+		}
+		span {
+			top: calc(50% - rem(1));
+		}
+		.menu-open & {
+			span {
+				display: none;
+			}
+			&::before {
+				top: calc(50% - rem(1));
+				transform: rotate(-45deg);
+			}
+			&::after {
+				bottom: calc(50% - rem(1));
+				transform: rotate(45deg);
+			}
+		}
+	}
+}
