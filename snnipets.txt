@@ -613,7 +613,7 @@
 	"After": {
 		"prefix": "a",
 		"body": [
-			"&::after{\n\tcontent:'';\n\t$0\n}"
+			"&::after {\n\tcontent: '';\n\t$0\n}"
 		],
 		"description": "after"
 	},

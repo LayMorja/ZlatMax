@@ -1,1 +1,438 @@
-// Заголовки, общие БЄМ блоки и проче...
+// Общий блок со слайдером карточек ====================================================================================================
+.products-slider {
+
+   &__container {
+   }
+
+   &__header {
+      &:not(:last-child) {
+         @include adaptiveValue("margin-bottom", 50, 30);
+      }
+      @media(min-width: $mobile) {
+         display: flex;
+         align-items: center;
+         gap: rem(20);
+         justify-content: space-between;
+      }
+   }
+
+   &__title {
+      font-weight: 700;
+      font-size: rem(30);
+      line-height: math.div(46, 30);
+      letter-spacing: 0.05em;
+      color: #141414;
+   }
+
+   &__more {
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: rgba(20, 20, 20, 0.58);
+      display: inline-flex;
+      align-items: center;
+      gap: em(15);
+      transition: color 0.3s ease;
+      &::after {
+         @extend %ic;
+         content: "\e901";
+         transform: rotate(-90deg);
+         color: $orangeColor;
+         font-size: em(7);
+      }
+      @media (any-hover: hover){
+         &:hover {            
+            color: rgba(20, 20, 20, 0.95);
+         }
+      }
+   }
+
+   &__slider {
+      padding: rem(15) rem(20);
+      margin: 0 rem(-20);
+   }
+
+   &__wrapper {
+      &:not(:last-child) {@include adaptiveValue("margin-bottom", 50, 30);}
+      
+   }
+}
+
+// Карточка слайдера ====================================================================================================
+.product-card {
+   display: grid;
+   height: 100%;
+   grid-template-rows: auto, 1fr;
+   background: #FEFEFE;
+   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+   transition: box-shadow 0.6s ease;
+   position: relative;
+   &:hover {
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);      
+   }
+
+   &__sale {
+      position: absolute;
+      top: rem(20);
+      left: 0;
+      color: #fff;
+      background-color: $orangeColor;
+      padding: rem(6) rem(22);
+      z-index: 1;
+      pointer-events: none;
+   }
+
+   &__image {
+      @include adaptiveValue("padding-top", 25, 15);
+      @include adaptiveValue("padding-bottom", 25, 15);
+      @include adaptiveValue("padding-left", 50, 15);
+      @include adaptiveValue("padding-right", 50, 15);
+   }
+
+   &__item-image-ibg {
+      display: block;
+      padding-bottom: percent(240, 270); 
+   }
+
+   &__body {
+      padding: rem(20);
+      display: flex;
+      flex-direction: column;
+   }
+
+   &__title {
+      flex: 1 1 auto;
+      &:not(:last-child) {margin-bottom: em(13, 20);}
+   }
+
+   &__link-title {
+      font-weight: 600;
+      font-size: rem(20);
+      color: #141414;
+      &:hover {
+         text-decoration: underline;
+      }
+   }
+
+   &__info {
+      &:not(:last-child) {margin-bottom: em(13, 16);}
+   }
+
+   &__rating {
+      justify-content: space-between;
+      &:not(:last-child) {margin-bottom: rem(26);}
+   }
+
+   &__footer {
+      border-top: 1px solid rgba(20, 20, 20, 0.5);
+      padding: rem(20) 0px rem(25);
+      display: flex;
+      align-items: center;
+      gap: rem(15);
+   }
+
+   &__price {
+      flex: 1 1 auto;
+      font-weight: 600;
+      font-size: rem(20);
+      color: #141414;
+   }
+
+   &__compare,
+   &__favorite {
+      font-size: rem(24);
+      transition: color 0.3s ease;
+      @media (any-hover: hover){
+         &:hover {
+            color: $orangeColor;
+         }
+      }
+   }
+
+   &__cart {
+      width: 100%;
+      text-align: center;
+      font-weight: 600;
+      span {
+         display: flex;
+         flex-direction: row-reverse;
+         align-items: center;
+         justify-content: center;
+         &::before {
+            margin: 0px 0px 0px rem(16);
+         }
+      }
+   }
+}
+
+// Размеры и материалы на карточке ====================================================================================================
+.info-product-card {
+   display: flex;
+   justify-content: space-between;
+   gap: rem(10);
+   font-weight: 600;
+   font-size: rem(16);
+   color: #ABABAB;
+   &__size {
+   }
+
+   &__materials {
+      text-align: right;
+   }
+}
+
+// Точки слайдера ====================================================================================================
+.dotts {
+   display: grid;
+   grid-auto-flow: column;
+   transform: translate(0, 12%);
+   justify-content: center;
+   margin: 0 auto;
+   overflow: hidden;
+   .swiper-pagination-bullet {
+      cursor: pointer;
+      height: rem(30);
+      width: rem(18);
+      position: relative;
+      transition: width 0.3s ease;
+      &:not(:last-child) {margin-right: 15px;}
+      &::after {
+         content: '';
+         height: rem(2);
+         background-color: #898989;
+         position: absolute;
+         top: 50%;
+         transform: translate(0, -50%);
+         width: 100%;
+      }
+      &::before {
+         content: '';
+         position: absolute;
+         background-color: $orangeColor;
+         width: rem(10);
+         height: rem(10);
+         top: 50%;
+         left: 0;
+         transform: translate(0, -50%);
+         border-radius: 50%;
+         opacity: 0;
+      }
+   }
+   .swiper-pagination-bullet-active {
+      width: rem(28);
+      position: relative;
+      &::after {
+         background-color: $orangeColor;
+      }
+      &::before {
+         opacity: 1;
+         transition: left 2s linear;
+         left: rem(8);
+      }
+   }
+}
+
+// Блок "Новинки" ====================================================================================================
+.products-new {
+   padding: rem(45) 0px 0px 0px;
+   position: relative;
+   background: url(@img/mainpage/new-products/bg.jpg) bottom / cover no-repeat;
+   &::before{
+      content:'';
+      background-color: #fff;
+      @include adaptiveValue("height", 45, 15);
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: percent(1030, 1920);
+
+   }
+
+   &__inner {
+      @include adaptiveValue("padding-top", 55, 20);
+      @include adaptiveValue("padding-bottom", 55, 15);
+
+   }
+
+   &__container {
+      display: grid;
+      row-gap: rem(30);
+      @media(min-width: $tablet) {
+         grid-template-columns: rem(400) 1fr;
+         align-items: start;
+      }
+   }
+
+   &__body {
+      color: #fff;
+      @include adaptiveValue("padding-right", 70, 20, 1630, 992, 1);
+   }
+
+   &__content {
+      min-width: 0;
+      @media(min-width: $tablet) {
+         padding: rem(37) 0px 0px 0px;
+      }
+   }
+
+   &__title {
+      position: relative;
+      z-index: 2;
+      font-weight: 700;
+      font-size: rem(30);
+      letter-spacing: 0.05em;
+      &:not(:last-child) {margin-bottom: em(30, 30);}
+   }
+
+   &__text {
+      position: relative;
+      z-index: 2;
+      line-height: math.div(27, 18);
+      letter-spacing: 0.03em;      
+      color: rgba(255, 255, 255, 0.7);
+      @include adaptiveValue("margin-bottom", 60, 20);
+   }
+
+   &__link {
+      position: relative;
+      z-index: 2;      
+   }
+
+   &__wrapper {
+      &:not(:last-child) {
+         @include adaptiveValue("margin-bottom", 50, 20);
+      }
+   }
+
+   &__dotts {
+      position: relative;
+      z-index: 10;
+   }
+}
+
+//====================================================================================================
+.link-arrow {
+   display: inline-flex;
+   flex-direction: row-reverse;
+   align-items: center;
+   font-weight: 600;
+   font-size: rem(20);
+   letter-spacing: 0.05em;
+   color: $orangeColor;
+   &::before {
+      color: $orangeColor;
+      font-size: rem(9);
+      transform: rotate(-90deg);
+      margin: 0px 0px 0px em(20, 9);
+      transition: all 0.6s ease;
+   }
+   @media (any-hover: hover){
+      &:hover {
+         span {
+            text-decoration: underline;
+         }
+         &::before{
+            transform: rotate(270deg);
+         }
+      }
+   }
+}
+
+//====================================================================================================
+.breadcrumbs {
+   white-space: nowrap;
+   overflow: auto;
+   height: rem(22);
+
+   &__list {
+      display: flex;
+   }
+
+   &__item {
+      line-height: math.div(20, 16);
+      font-size: rem(16);
+   }
+
+   &__link {
+      color: #141414;
+      opacity: 0.5;
+      display: flex;
+      align-items: center;
+      &::after {
+         content: "\e901";
+         @extend %ic;
+         transform: rotate(-90deg);
+         font-size: rem(7);
+         margin: 0 em(15, 7);
+      }
+   }
+
+   &__current {
+      color: $orangeColor;
+   }
+}
+
+//====================================================================================================
+.title {
+   font-weight: 700;
+   font-size: rem(24);
+   line-height: math.div(29, 24);
+   color: $mainDarkColor;
+   &:not(:last-child) {margin-bottom: em(25, 24);}
+}
+
+//====================================================================================================
+.pagging {
+   display: flex;
+   justify-content: flex-end;
+   align-items: center;
+   @include adaptiveValue("gap", 30, 15);
+
+   &__arrow {
+      color: $orangeColor;
+      &::before {
+      font-size: rem(9);
+      transform: rotate(-90deg);
+      }
+      &:disabled {
+         color: rgba(0, 0, 0, 0.12);
+      }
+
+      &_left {
+         &::before {
+            transform: rotate(90deg);
+         }
+      }
+
+      &_right {
+      }
+   }
+
+   &__list {
+      display: flex;
+      align-items: center;
+      gap: rem(13);
+   }
+
+   &__item {
+   }
+
+   &__link {
+      width: rem(34);
+      height: rem(34);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background-color 0.3s ease, color 0.2s ease;
+      &._active {
+         background-color: $orangeColor;
+         color: #fff;
+      }
+      @media(any-hover: hover) {
+         &:hover {
+            background-color: $orangeColor;
+            color: #fff;
+         }
+      }
+   }
+}

@@ -135,3 +135,35 @@ body {
 
 // Подключение стилей отдельных страниц
 @import "home";
+@import "catalog";
+@import "product";
+
+
+.page {
+
+   &_inner {
+      padding-top: rem(30);
+   }
+
+   &__header {
+      margin-bottom: rem(30);
+   }
+   
+   &_home {
+   }
+
+   &__main-block {
+   }
+
+   &__catalog-cards {
+   }
+
+   &__products-slider {
+   }
+
+   &__articles-module {
+   }
+
+   &__products-block {
+   }
+}

@@ -2,13 +2,40 @@
 // Снипет (HTML): btn
 
 .button {
-	display: inline-flex;
-	padding: 0px 0px;
+   color: #fff;
+	display: inline-block;
+   text-align: center;
+   padding: rem(9) 0;
+   @include adaptiveValue("padding-left", 52, 30);
+   @include adaptiveValue("padding-right", 52, 30);
+   background-color: $orangeColor;
+   border-radius: 3px;
+   font-weight: 600;
+   line-height: math.div(32, 20);
+   transition: all 0.3s ease;
+   &_border {
+      border: 2px solid $orangeColor;
+      background-color: #fff;
+      color: $orangeColor;
+      box-shadow: none;
+   }
 	@media (any-hover: hover) {
-		&:hover {
-		}
+      &:hover {
+         box-shadow: 0px 4px 10px rgba(232, 170, 49, 0.6);
+         transform: translateY(rem(-2));
+      }
 	}
+   @media(min-width: $tablet) {
+      font-size: rem(20);
+   }
 	&._fw {
 		width: 100%;
 	}
+   &_black {
+      background-color: #000;
+      &:hover {
+         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);
+         transform: translateY(rem(-2));         
+      }
+   }
 }

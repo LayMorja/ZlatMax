@@ -58,7 +58,7 @@
 	&__options {
 		color: #000;
 		position: absolute;
-		top: 29px;
+		top: rem(29);
 		border-radius: 0 0 4px 4px;
 		min-width: 100%;
 		left: 0;
@@ -123,6 +123,33 @@
 	}
 	&._select-checkbox {
 	}
+
+   &_control {
+      .select__title {
+         border: 1px solid rgba(4, 4, 4, 0.3);
+         border-radius: 3px;
+      }
+      .select__value {
+         height: rem(40);
+         color: rgba(0, 0, 0, 0.5);
+         padding: 0 rem(25) 0 rem(15);
+         &:after {
+            @extend %ic;
+            content: "\e901";
+            font-size: rem(8);
+            margin-left: em(10, 8);
+         }
+      }
+      .select__option {
+         color: rgba(0, 0, 0, 0.5);
+         top: rem(42);
+         @media(any-hover: hover) {
+            &:hover {               
+               color: rgba(0, 0, 0, 1);
+            }
+         }
+      }
+   }
 }
 
 // Тег
